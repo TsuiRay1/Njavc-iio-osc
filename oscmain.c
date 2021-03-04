@@ -96,7 +96,7 @@ static void init_application ()
 {
 	GtkBuilder *builder;
 	GtkWidget  *window;
-	//GtkWidget  *btn_capture;
+	GtkWidget  *btn_capture;
 	GtkWidget  *infobar_close, *infobar_reconnect;
 	GtkWidget  *infobar_box;
 	GtkWidget  *vcheck_dont_show;
@@ -142,7 +142,7 @@ static void init_application ()
 
 	window = GTK_WIDGET(gtk_builder_get_object(builder, "main_menu"));
 	notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook"));
-	//btn_capture = GTK_WIDGET(gtk_builder_get_object(builder, "new_capture_plot"));
+	btn_capture = GTK_WIDGET(gtk_builder_get_object(builder, "new_capture_plot"));
 	tooltips_en = GTK_WIDGET(gtk_builder_get_object(builder, "menuitem_tooltips_en"));
 	versioncheck_en = GTK_WIDGET(gtk_builder_get_object(builder, "menuitem_vcheck_startup"));
 	vcheck_dont_show = GTK_WIDGET(gtk_builder_get_object(builder, "version_check_dont_show_again"));
@@ -153,7 +153,7 @@ static void init_application ()
 
 	/* Connect signals. */
 	g_signal_connect(G_OBJECT(window), "delete-event", G_CALLBACK(application_quit), NULL);
-	//g_signal_connect(G_OBJECT(btn_capture), "activate", G_CALLBACK(new_plot_cb), NULL);
+	g_signal_connect(G_OBJECT(btn_capture), "activate", G_CALLBACK(new_plot_cb), NULL);
 	g_signal_connect(G_OBJECT(tooltips_en), "toggled", G_CALLBACK(tooltips_enable_cb), NULL);
 	g_signal_connect(G_OBJECT(versioncheck_en), "toggled", G_CALLBACK(versioncheck_en_cb), vcheck_dont_show);
 	g_signal_connect(G_OBJECT(vcheck_dont_show), "toggled", G_CALLBACK(vcheck_dont_show_cb), versioncheck_en);
@@ -252,7 +252,7 @@ gint main (int argc, char **argv)
 		if (!ctx)
 			connect_dialog(false);
 
-		//create_default_plot();
+		create_default_plot();
 		if (c == 0) {
 			if (gtk_check_menu_item_get_active(
 					GTK_CHECK_MENU_ITEM(versioncheck_en)))

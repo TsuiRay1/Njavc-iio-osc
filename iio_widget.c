@@ -295,8 +295,6 @@ static void iio_button_init(struct iio_widget *widget,
 static void iio_combo_box_save(struct iio_widget *widget)
 {
 	gchar *text;
-	FILE *fp1 = fopen("./log.txt", "a+");
-	fprintf(fp1,"[xl]==>test\n");
 	
 	text = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(widget->widget));
 	if (text == NULL)
@@ -304,15 +302,13 @@ static void iio_combo_box_save(struct iio_widget *widget)
 
 	if (widget->chn)
 	{
-		fprintf(fp1,"[xl]==>iio_channel_attr_write\n");
 		iio_channel_attr_write(widget->chn, widget->attr_name, text);
 	}
 	else
 	{
-		fprintf(fp1,"[xl]==>iio_device_attr_write,text=%s,attr_name=%s\n",text,widget->attr_name);
 		iio_device_attr_write(widget->dev, widget->attr_name, text);
 	}
-	fclose(fp1);
+
 	g_free(text);
 }
 

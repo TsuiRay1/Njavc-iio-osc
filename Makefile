@@ -94,7 +94,9 @@ PLUGINS=\
 	plugins/generic_dac.$(SO) \
 	plugins/nrf9022.$(SO) \
 	plugins/nrf9022_adv.$(SO) \
-	plugins/lidar.$(SO) \
+	plugins/debug.$(SO) \
+	plugins/dmm.$(SO) \
+	plugins/dac_data_manager.$(SO) \
 	$(if $(WITH_MINGW),,plugins/spectrum_analyzer.so) \
 	$(if $(WITH_MINGW),,plugins/scpi.so)
 

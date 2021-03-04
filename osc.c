@@ -730,12 +730,12 @@ capture_malloc_fail:
 	fprintf(stderr, "%s:%s malloc failed\n", __FILE__, __func__);
 	return -ENOMEM;
 }
-/*
+
 OscPlot * plugin_get_new_plot(void)
 {
 	return OSC_PLOT(new_plot_cb(NULL, NULL));
 }
-*/
+
 void plugin_osc_stop_capture(void)
 {
 	stop_sampling();
@@ -1519,7 +1519,7 @@ static void plot_init(GtkWidget *plot)
 	osc_plot_set_quit_callback(OSC_PLOT(plot), (void (*)(void *))application_quit, NULL);
 	gtk_widget_show(plot);
 }
-/*
+
 GtkWidget * new_plot_cb(GtkMenuItem *item, gpointer user_data)
 {
 	GtkWidget *new_plot;
@@ -1534,7 +1534,7 @@ GtkWidget * new_plot_cb(GtkMenuItem *item, gpointer user_data)
 
 	return new_plot;
 }
-*/
+
 struct plugin_check_fct {
 	void *fct_pointer;
 	char *dev_name;
@@ -1973,14 +1973,14 @@ static void window_size_readjust(GtkWindow *window, int width, int height)
 		h = height;
 	gtk_window_set_default_size(window, w, h);
 }
-/*
+
 void create_default_plot(void)
 {
 	if (ctx && !!iio_context_get_devices_count(ctx) &&
 			g_list_length(plot_list) == 0)
 		new_plot_cb(NULL, NULL);
 }
-*/
+
 void do_init(struct iio_context *new_ctx)
 {
 	init_device_list(new_ctx);
@@ -2015,7 +2015,7 @@ OscPlot * osc_find_plot_by_id(int id)
  * Check for settings in sections [MultiOsc_Capture_Configuration1,2,..]
  * Handler should return zero on success, a negative number on error.
  */
-/*
+
 static int capture_profile_handler(int line, const char *section,
 		const char *name, const char *value)
 {
@@ -2036,11 +2036,11 @@ static int capture_profile_handler(int line, const char *section,
 		osc_plot_set_id(plot, plot_id);
 		osc_plot_set_visible(plot, false);
 	}
-*/
+
 	/* Parse the line from ini file */
-/*	return osc_plot_ini_read_handler(plot, line, section, name, value);
+	return osc_plot_ini_read_handler(plot, line, section, name, value);
 }
-*/
+
 static void gfunc_save_plot_data_to_ini(gpointer data, gpointer user_data)
 {
 	OscPlot *plot = OSC_PLOT(data);
@@ -2201,9 +2201,9 @@ static int load_profile_sequential_handler(int line, const char *section,
 		}
 	}
 
-/*	if (!strncmp(section, CAPTURE_INI_SECTION, sizeof(CAPTURE_INI_SECTION) - 1))
+	if (!strncmp(section, CAPTURE_INI_SECTION, sizeof(CAPTURE_INI_SECTION) - 1))
 		return capture_profile_handler(line, section, name, value);
-*/
+
 	if (!strcmp(section, OSC_INI_SECTION))
 		return handle_osc_param(line, name, value);
 
@@ -2370,7 +2370,7 @@ nope:
 
 	move_gtk_window_on_screen(GTK_WINDOW(main_window), x_pos, y_pos);
 
-	//foreach_in_ini(filename, capture_profile_handler);
+	foreach_in_ini(filename, capture_profile_handler);
 
 	for (node = plugin_list; node; node = g_slist_next(node)) {
 		struct osc_plugin *plugin = node->data;
