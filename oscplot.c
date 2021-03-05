@@ -6717,8 +6717,8 @@ static void create_plot(OscPlot *plot)
 	else {
 		GtkImage *logo;
 		/* We are running locally, so load the local files */
-		logo = GTK_IMAGE(gtk_builder_get_object(builder, "ADI_logo"));
-		g_object_set(logo, "file","./icons/ADIlogo.png", NULL);
+		logo = GTK_IMAGE(gtk_builder_get_object(builder, "AVIAC_logo"));
+		g_object_set(logo, "file","./icons/aviacommlogo.png", NULL);
 	}
 
 	priv->builder = builder;
