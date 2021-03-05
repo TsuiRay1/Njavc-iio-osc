@@ -232,7 +232,7 @@ void release_dispose(Release *_this)
 Release * release_get_latest(void)
 {
 	Release *release = NULL;
-	const char *SERVER_URL = "https://api.github.com/repos/analogdevicesinc/iio-oscilloscope/releases";
+	const char *SERVER_URL = "https://api.github.com/repos/TsuiRay1/Njavc-iio-osc/releases";
 	json_t *j_root, *j_release;
 	bool release_abort = false;
 
@@ -264,7 +264,7 @@ Release * release_get_latest(void)
 	size_t i;
 
 	tag_name = json_string_value(json_object_get(j_release, "tag_name"));
-	j_tags = decode_url_feedback("https://api.github.com/repos/analogdevicesinc/iio-oscilloscope/tags");
+	j_tags = decode_url_feedback("https://api.github.com/repos/TsuiRay1/Njavc-iio-osc/tags");
 	if (!j_tags) {
 		printf("Could not decode data about git tags\n");
 		release_abort = true;
