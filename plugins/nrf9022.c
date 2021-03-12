@@ -195,7 +195,7 @@ static const char * fmcomms2_driver_attribs[] = {
 
 static void glb_settings_update_labels(void)
 {
-	float rates[6];
+	float rates[7];
 	char tmp[160],buf[1024];
 	ssize_t ret;
 
@@ -237,12 +237,12 @@ static void glb_settings_update_labels(void)
 
 	ret = iio_device_attr_read(dev, "rx_path_rates", buf, sizeof(buf));
 	if (ret > 0) {
-		sscanf(buf, "BBPLL:%f ADC:%f R2:%f R1:%f RF:%f RXSAMP:%f",
+		sscanf(buf, "DPLL:%f ADC:%f R2:%f R1:%f RF:%f RXSAMP:%f INTF:%f",
 		        &rates[0], &rates[1], &rates[2], &rates[3], &rates[4],
-			&rates[5]);
-		sprintf(tmp, "BBPLL: %4.3f   ADC: %4.3f   R2: %4.3f   R1: %4.3f   RF: %4.3f   RXSAMP: %4.3f",
+			&rates[5],&rates[6]);
+		sprintf(tmp, "DPLL: %4.3f   ADC: %4.3f   R2: %4.3f   R1: %4.3f   RF: %4.3f   RXSAMP: %4.3f   INTF: %f",
 		        rates[0] / 1e6, rates[1] / 1e6, rates[2] / 1e6,
-			rates[3] / 1e6, rates[4] / 1e6, rates[5] / 1e6);
+			rates[3] / 1e6, rates[4] / 1e6, rates[5] / 1e6 ,rates[6] / 1e6);
 
 		gtk_label_set_text(GTK_LABEL(rx_path_rates), tmp);
 	} else {
@@ -251,12 +251,12 @@ static void glb_settings_update_labels(void)
 
 	ret = iio_device_attr_read(dev, "tx_path_rates", buf, sizeof(buf));
 	if (ret > 0) {
-		sscanf(buf, "BBPLL:%f DAC:%f T2:%f T1:%f TF:%f TXSAMP:%f",
+		sscanf(buf, "DPLL:%f DAC:%f T2:%f T1:%f TF:%f TXSAMP:%f INTF:%f",
 		        &rates[0], &rates[1], &rates[2], &rates[3], &rates[4],
-			&rates[5]);
-		sprintf(tmp, "BBPLL: %4.3f   DAC: %4.3f   T2: %4.3f   T1: %4.3f   TF: %4.3f   TXSAMP: %4.3f",
+			&rates[5],&rates[6]);
+		sprintf(tmp, "DPLL: %4.3f   DAC: %4.3f   T2: %4.3f   T1: %4.3f   TF: %4.3f   TXSAMP: %4.3f   INTF: %f",
 		        rates[0] / 1e6, rates[1] / 1e6, rates[2] / 1e6,
-			rates[3] / 1e6, rates[4] / 1e6, rates[5] / 1e6);
+			rates[3] / 1e6, rates[4] / 1e6, rates[5] / 1e6,rates[6] / 1e6);
 
 		gtk_label_set_text(GTK_LABEL(tx_path_rates), tmp);
 	} else {
@@ -1244,6 +1244,33 @@ static GtkWidget * fmcomms2_init(struct osc_plugin *plugin, GtkWidget *notebook,
 		gtk_widget_hide(sampling_freq_rx_decim);
 
 	}
+//v1.0 hide some windows
+	bool windows_switch = true;
+	if(windows_switch)
+	{
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"label7")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"calib_mode")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"label8")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"calib_mode_available")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"xo_corr_tab")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"label5")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"label25")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"trx_rate_governor")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"trx_rate_governor_available")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"rx_fastlock_label")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"rx_fastlock_profile")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"rx_fastlock_actions")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"rx_lo_external")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"frame8")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"box_RXs")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"tx_lo_external")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"tx_fastlock_label")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"tx_fastlock_profile")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"tx_fastlock_actions")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"box17")));
+	}
+
+
 
 	ch1 = iio_device_find_channel(dev, "altvoltage1", true);
 
