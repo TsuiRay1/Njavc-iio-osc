@@ -1268,6 +1268,8 @@ static GtkWidget * fmcomms2_init(struct osc_plugin *plugin, GtkWidget *notebook,
 		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"tx_fastlock_profile")));
 		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"tx_fastlock_actions")));
 		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"box17")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"label41")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder,"box4")));
 	}
 
 
