@@ -6,7 +6,7 @@ interface various IIO devices to different visualization methods within a
 Linux system.
 
 Special thanks to the original author of IIO Oscilloscope!
-This project is the secondary development of the open source project IIO Oscilloscope, mainly adding the NRF9022 chip-related plugin, and deletes the Oscilloscope part, mainly retaining the operation of the device and channel.
+This project is the secondary development of the open source project IIO Oscilloscope, mainly adding the NRF9022 chip-related plugin.
 
 The original project code can be found here: https://github.com/analogdevicesinc/iio-oscilloscope
 
