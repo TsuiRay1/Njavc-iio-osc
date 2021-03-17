@@ -16,7 +16,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <limits.h>
-
+#include "libini2.h"
 #include <iio.h>
 
 #include "compat.h"
@@ -1141,7 +1141,10 @@ void dialogs_init(GtkBuilder *builder)
 	dialogs.ver_progress_window = GTK_WIDGET(gtk_builder_get_object(builder, "progress_window"));
 	dialogs.ver_progress_bar = GTK_WIDGET(gtk_builder_get_object(builder, "progressbar"));
 	gtk_builder_connect_signals(builder, &dialogs);
-
+	//Displays last logged in IP at startup
+	gchar *filename = g_build_filename(getenv("HOME") ?: getenv("LOCALAPPDATA"),DEFAULT_PROFILE_NAME, NULL);
+	char *value = read_token_from_ini(filename, OSC_INI_SECTION, "remote_ip_addr");
+	gtk_entry_set_text(GTK_ENTRY(dialogs.net_ip),value);
 	/* Bind some dialogs radio buttons to text/labels */
 	tmp = GTK_WIDGET(gtk_builder_get_object(builder, "connect_net_label"));
 	serial_num = GTK_WIDGET(gtk_builder_get_object(builder, "serial_number"));
